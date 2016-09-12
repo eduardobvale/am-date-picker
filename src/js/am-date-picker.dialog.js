@@ -5,9 +5,9 @@
         .module('am.date-picker')
         .controller('amDatePickerDialogCtrl', DialogController);
 
-    DialogController.$inject = ['$timeout', '$mdDialog'];
+    DialogController.$inject = ['$timeout', '$mdDialog', 'popupDateFormat', 'prevIcon', 'nextIcon', 'minDate', 'maxDate'];
 
-    function DialogController($timeout, $mdDialog) {
+    function DialogController($timeout, $mdDialog, popupDateFormat, prevIcon, nextIcon, minDate, maxDate) {
         var dialog = this,
             delay = 110;
 
@@ -20,11 +20,15 @@
         dialog.select = select;
         dialog.selectYear = selectYear;
         dialog.today = today;
-
+        dialog.popupDateFormat = popupDateFormat;
+        dialog.prevIcon = prevIcon;
+        dialog.nextIcon = nextIcon;
         dialog.monthChanged = true;
         dialog.isTodayDisabled = false;
         dialog.yearSelection = false;
-
+        dialog.minDate = minDate;
+        dialog.maxDate = maxDate;
+        
         init();
 
         function init() {

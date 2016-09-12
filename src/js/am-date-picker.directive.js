@@ -32,7 +32,8 @@
                 minYear: '=?amMinYear',
                 popupDateFormat: '@?amPopupDateFormat',
                 showInputIcon: '=?amShowInputIcon',
-                todayButton: '@?amTodayButton'
+                todayButton: '@?amTodayButton',
+                additionalClass: '@?amAdditionalClass'
             },
             templateUrl: 'am-date-picker.html'
         };
@@ -99,7 +100,9 @@
 
         function openPicker(ev) {
             $mdDialog.show({
-                bindToController: true,
+                preserveScope: true,
+                autoWrap: false,
+                skipHide: true,
                 controller: 'amDatePickerDialogCtrl',
                 controllerAs: 'dialog',
                 locals: {
@@ -114,17 +117,13 @@
                     locale: amDatePicker.locale,
                     popupDateFormat: amDatePicker.popupDateFormat,
                     prevIcon: amDatePicker.prevIcon,
-                    todayButton: amDatePicker.todayButton
+                    todayButton: amDatePicker.todayButton,
+                    additionalClass: amDatePicker.additionalClass
                 },
-                parent: angular.element(document.body),
-                targetEvent: ev,
                 templateUrl: 'am-date-picker_content.tmpl.html'
             }).then(function(selectedDate) {
                 amDatePicker.ngModelCtrl.$setViewValue(selectedDate);
-                amDatePicker.ngModelCtrl.$setTouched();
                 render();
-            }, function() {
-                amDatePicker.ngModelCtrl.$setTouched();
             });
         }
 

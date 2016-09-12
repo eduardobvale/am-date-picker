@@ -1,7 +1,7 @@
 <div style="outline-style: none;">
     <!-- Date picker input -->
     <div>
-        <md-input-container ng-class="{'md-has-icon': amDatePicker.showInputIcon &&
+        <md-input-container class="{{ amDatePicker.additionalClass }}" ng-class="{'md-has-icon': amDatePicker.showInputIcon &&
                                                       (amDatePicker.showInputIcon || amDatePicker.allowClear) }">
             <label>{{ amDatePicker.inputLabel }}</label>
             <div class="am-date-picker__calendar-icon" ng-if="amDatePicker.showInputIcon">
