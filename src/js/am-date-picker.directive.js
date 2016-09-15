@@ -33,7 +33,8 @@
                 popupDateFormat: '@?amPopupDateFormat',
                 showInputIcon: '=?amShowInputIcon',
                 todayButton: '@?amTodayButton',
-                additionalClass: '@?amAdditionalClass'
+                additionalClass: '@?amAdditionalClass',
+                isDisabled: '=ngDisabled'
             },
             templateUrl: 'am-date-picker.html'
         };
@@ -99,32 +100,36 @@
         }
 
         function openPicker(ev) {
-            $mdDialog.show({
-                preserveScope: true,
-                autoWrap: false,
-                skipHide: true,
-                controller: 'amDatePickerDialogCtrl',
-                controllerAs: 'dialog',
-                locals: {
-                    backButtonText: amDatePicker.backButtonText,
-                    cancelButton: amDatePicker.cancelButton,
-                    date: amDatePicker.ngModelCtrl.$viewValue,
-                    maxDate: amDatePicker.maxDate,
-                    maxYear: amDatePicker.maxYear,
-                    minDate: amDatePicker.minDate,
-                    minYear: amDatePicker.minYear,
-                    nextIcon: amDatePicker.nextIcon,
-                    locale: amDatePicker.locale,
-                    popupDateFormat: amDatePicker.popupDateFormat,
-                    prevIcon: amDatePicker.prevIcon,
-                    todayButton: amDatePicker.todayButton,
-                    additionalClass: amDatePicker.additionalClass
-                },
-                templateUrl: 'am-date-picker_content.tmpl.html'
-            }).then(function(selectedDate) {
-                amDatePicker.ngModelCtrl.$setViewValue(selectedDate);
-                render();
-            });
+
+            if (!(amDatePicker.isDisabled == true)) {
+
+                $mdDialog.show({
+                    preserveScope: true,
+                    autoWrap: false,
+                    skipHide: true,
+                    controller: 'amDatePickerDialogCtrl',
+                    controllerAs: 'dialog',
+                    locals: {
+                        backButtonText: amDatePicker.backButtonText,
+                        cancelButton: amDatePicker.cancelButton,
+                        date: amDatePicker.ngModelCtrl.$viewValue,
+                        maxDate: amDatePicker.maxDate,
+                        maxYear: amDatePicker.maxYear,
+                        minDate: amDatePicker.minDate,
+                        minYear: amDatePicker.minYear,
+                        nextIcon: amDatePicker.nextIcon,
+                        locale: amDatePicker.locale,
+                        popupDateFormat: amDatePicker.popupDateFormat,
+                        prevIcon: amDatePicker.prevIcon,
+                        todayButton: amDatePicker.todayButton,
+                        additionalClass: amDatePicker.additionalClass
+                    },
+                    templateUrl: 'am-date-picker_content.tmpl.html'
+                }).then(function(selectedDate) {
+                    amDatePicker.ngModelCtrl.$setViewValue(selectedDate);
+                    render();
+                });
+            }
         }
 
         function render() {
